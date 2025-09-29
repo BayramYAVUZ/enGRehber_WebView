@@ -146,8 +146,20 @@ class _MyHomePageState extends State<MyHomePage> with WidgetsBindingObserver {
               WebViewWidget(controller: _webViewController),
 
             if (_isLoading)
-              const Center(
-                child: CircularProgressIndicator(),
+              Center(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    const SizedBox(height: 35),
+                    Image.asset(
+                      "assets/logo.png",
+                      width: 275, 
+                      height: 275, 
+                    ),
+                    const SizedBox(height: 75),
+                    const CircularProgressIndicator(),
+                  ],
+                ),
               ),
           ],
         ),
