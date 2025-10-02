@@ -90,19 +90,19 @@ class _MyHomePageState extends State<MyHomePage> with WidgetsBindingObserver {
     WidgetsBinding.instance.removeObserver(this);
     super.dispose();
   }
+  
+@override
+void didChangeMetrics() {
+  final bottomInset = WidgetsBinding.instance.platformDispatcher.views.first.viewInsets.bottom;
+  if (bottomInset != _keyboardHeight) {
+    _keyboardHeight = bottomInset;
 
-  @override
-  void didChangeMetrics() {
-    final bottomInset = WidgetsBinding.instance.window.viewInsets.bottom;
-    if (bottomInset != _keyboardHeight) {
-      _keyboardHeight = bottomInset;
-
-      if (_keyboardHeight > 0) {
-        _webViewController.runJavaScript(
-            "if(document.activeElement) { document.activeElement.scrollIntoView({behavior: 'smooth', block: 'center'}); document.activeElement.focus(); }");
-      }
+    if (_keyboardHeight > 0) {
+      _webViewController.runJavaScript(
+          "if(document.activeElement) { document.activeElement.scrollIntoView({behavior: 'smooth', block: 'center'}); document.activeElement.focus(); }");
     }
   }
+}
 
   @override
   Widget build(BuildContext context) {
